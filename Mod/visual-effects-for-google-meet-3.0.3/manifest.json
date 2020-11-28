@@ -1,0 +1,37 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 2,
+  "name": "Visual Effects Mod by Stef",
+  "description": "Virtual Green Screens, Blur, Pixelate, Inverse, Contrast and More!",
+  "version": "3.0.3",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["main.js", "content/injectScripts.js"],
+      "matches": [
+        "*://meet.google.com/**-**-**",
+        "*://visual-effects.herokuapp.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": ["dist/*"],
+  "background": {
+    "scripts": ["update.js"]
+  },
+  "browser_action": {
+    "default_title": "Visual Effects",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "*://meet.google.com/**-**-**",
+    "*://visual-effects.herokuapp.com/*",
+    "storage"
+  ],
+  "icons": {
+    "32": "icons/32.png",
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  }
+}
