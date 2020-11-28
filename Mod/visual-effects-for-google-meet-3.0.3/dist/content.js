@@ -8,6 +8,9 @@
       
       */
 // Happiness is a choice. Now get out of my code
+//No, I don't think I will : )
+window.delay = 1000;
+
 if (location.pathname.match(/\-/g).length >= 2) {
   async function checkForAlternate() {
     navigator.mediaDevices.getUserMedia = MediaDevices.prototype.getUserMedia.bind(
@@ -1137,31 +1140,56 @@ if (location.pathname.match(/\-/g).length >= 2) {
         ]
       });
       new OpticElement("line", {});
-      this.UI.Labels.Freeze2 = new OpticElement("checkbox", {
+      this.UI.Labels.Lag = new OpticElement("checkbox", {
         parent: ".optic-menu",
         labelData: {
+          text: "hw",
           name: "Lag",
-          id: "freeze2",
-          slider: false,
+          id: "lag",
+          slider: {min:200, max:2000},
           upload: false //{ accept: ["image/png", "image/jpeg"], text: "" },
         },
         listeners: [
           {
-            selector: "#freeze2-box",
+            selector: "#lag-box",
             events: ["input"],
             listener: function (e) {
               if (e.target.checked) {
-                window.myVar = setInterval(() => {this.Freeze = false;}, 1000);
-                setTimeout(() => {window.myVar2 = setInterval(() => {this.Freeze = true;}, 1000);}, 200);
+                window.myVar = setInterval(() => {this.Freeze = false;}, window.delay);
+                setTimeout(() => {window.myVar2 = setInterval(() => {this.Freeze = true;}, window.delay);}, 200);
               }else{
                 clearInterval(window.myVar);
                 clearInterval(window.myVar2);
                 this.Freeze = false;
               }
             }.bind(this)
+          },
+          {
+            selector: "#lag-rate",
+            events: ["input"],
+            listener: function (e) {
+              this.UI.Labels.Lag.rate = 2001 - parseInt(document.getElementById("lag-rate").value)
+              window.delay = this.UI.Labels.Lag.rate;
+              if (document.getElementById("lag-box").checked) {
+                var check = window.delay;
+                setTimeout(() => {if (window.delay == check){
+                  clearInterval(window.myVar);
+                  clearInterval(window.myVar2);
+                  window.myVar = setInterval(() => {this.Freeze = false;}, window.delay);
+                  setTimeout(() => {window.myVar2 = setInterval(() => {this.Freeze = true;}, window.delay);}, 200);
+                }}, 200);
+              }
+            }.bind(this)
           }
         ]
       });
+      var div = document.getElementById("lag-rate");
+      var text = document.createElement("span");
+      var text2 = document.createElement("span");
+      text.innerHTML = "max";
+      text2.innerHTML = "min<br>ㅤ2sㅤㅤㅤㅤㅤㅤ0.2s</br>";
+      div.parentNode.insertBefore(text, div);
+      div.parentNode.insertBefore(text2, div.nextSibling);
       new OpticElement("line", {});
       this.UI.Labels.Inverse = new OpticElement("checkbox", {
         parent: ".optic-menu",
