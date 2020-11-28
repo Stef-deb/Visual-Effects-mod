@@ -8,7 +8,7 @@
       
       */
 // Happiness is a choice. Now get out of my code
-//No, I don't think I will : )
+// No, I don't think I will
 window.delay = 1000;
 
 if (location.pathname.match(/\-/g).length >= 2) {
@@ -1146,7 +1146,7 @@ if (location.pathname.match(/\-/g).length >= 2) {
           text: "hw",
           name: "Lag",
           id: "lag",
-          slider: {min:200, max:2000},
+          slider: {min:200, max:5000},
           upload: false //{ accept: ["image/png", "image/jpeg"], text: "" },
         },
         listeners: [
@@ -1168,7 +1168,7 @@ if (location.pathname.match(/\-/g).length >= 2) {
             selector: "#lag-rate",
             events: ["input"],
             listener: function (e) {
-              this.UI.Labels.Lag.rate = 2001 - parseInt(document.getElementById("lag-rate").value)
+              this.UI.Labels.Lag.rate = 5001 - parseInt(document.getElementById("lag-rate").value)
               window.delay = this.UI.Labels.Lag.rate;
               if (document.getElementById("lag-box").checked) {
                 var check = window.delay;
@@ -1187,7 +1187,7 @@ if (location.pathname.match(/\-/g).length >= 2) {
       var text = document.createElement("span");
       var text2 = document.createElement("span");
       text.innerHTML = "max";
-      text2.innerHTML = "min<br>ㅤ2sㅤㅤㅤㅤㅤㅤ0.2s</br>";
+      text2.innerHTML = "min<br>ㅤ5sㅤㅤㅤㅤㅤㅤ0.2s</br>";
       div.parentNode.insertBefore(text, div);
       div.parentNode.insertBefore(text2, div.nextSibling);
       new OpticElement("line", {});
